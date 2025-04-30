@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Custom Note Service
 
-## Getting Started
+A simple, fast, and fully responsive note-taking app built with **Next.js**, using **localStorage** for data persistence.  
+Perfect for quick thoughts, todos, and tracking tasks — all stored right in your browser!
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 [View the Live App](https://custom-note-service-two.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup & Run Steps
 
-## Learn More
+1. Clone the repository
+2. Install dependencies:
+   \`\`\`
+   npm install
+   \`\`\`
+3. Run the development server:
+   \`\`\`
+   npm run dev
+   \`\`\`
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-To learn more about Next.js, take a look at the following resources:
+## Design Decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Storage Strategy
+- **Why localStorage + key naming:** 
+  - Used localStorage for client-side persistence without requiring a backend
+  - Single storage key (`next-notes-app`) to store all notes as a JSON array, making it easy to manage the entire collection
+  - Structured data with timestamps and IDs for better organization and future-proofing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Component Design
+- **Why separate components:**
+  - `NoteForm`: Reusable component for both adding and editing notes
+  - `NoteCard`: Encapsulates display and actions for a single note
+  - `NoteList`: Manages fetching and displaying the collection of notes
+  - `NavTabs`: Provides consistent navigation between views
 
-## Deploy on Vercel
+### State Management
+- **Why useState + controlled inputs:**
+  - Simple form state management with direct access to current values
+  - Enables validation before submission
+  - Provides immediate UI feedback
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Why useEffect to sync storage → state:**
+  - Ensures component state reflects localStorage on mount
+  - Keeps UI in sync with persisted data
+  - Handles errors gracefully
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Styling
+- **Why Tailwind + shadcn/ui:**
+  - Tailwind for rapid utility-based styling and responsive design
+  - shadcn/ui for accessible, reusable components with consistent design
+  - Custom styling for interactive elements (completion status, hover states)
+
+### Navigation
+- **Why this nav approach:**
+  - Simple tab-based navigation between main views
+  - Active state indicators for current view
+  - Consistent layout across the application
+  - Next.js App Router for clean URL structure
+
+### Loading & Error States
+- **Why show spinner:**
+  - Provides immediate feedback during async operations
+  - Prevents user from submitting multiple times
+  - Indicates that the application is responsive
+
+- **Why display error banner:**
+  - Clear feedback when storage operations fail
+  - Consistent error handling across components
+  - Actionable information for users
+
+## Features
+
+- Add, edit, and delete notes
+- Mark notes as complete/incomplete
+- Responsive design for all screen sizes
+- Persistent storage using localStorage
+- Loading and error states
